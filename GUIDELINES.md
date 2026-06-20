@@ -45,8 +45,9 @@
 - This is achieved via client-side progress tracking and a mixin to `HumanoidModel`.
 
 ## Light Logic
-- The dynamic lighting is handled by `LightHandler.java` on the server side.
-- It uses vanilla `Blocks.LIGHT` to create a real light source that follows the player.
-- **Colored Light**: Since vanilla Minecraft does not support colored light blocks, `LightHandler` also spawns colored `DustParticles` based on the lantern's `lightColor` to provide a visual colored glow effect.
-- **Advanced Colored Light**: To achieve truly colored environmental lighting, it is highly recommended to use a library like **Lucent**.
-  - If Lucent is present, you can use `LucentEvent.GatherDataEvent` to provide the lantern's color and radius for a truly dynamic and colored experience.
+- The dynamic lighting is handled by `LightHandler.java` on the server side for world lighting and client side for visual effects.
+- It uses vanilla `Blocks.LIGHT` to create a real light source that follows the player and specific mod entities.
+- **Colored Light**: Since vanilla Minecraft does not support colored light blocks, `LightHandler` also spawns colored `DustParticles` based on the lantern's `lightColor`.
+  - For **Players**: Particles are spawned near the ground to simulate a colored glow on blocks.
+  - For **Mobs/Animals**: When near a lantern-holding player, entities are tinted with colored particles.
+- **Advanced Colored Light**: It is recommended to use colored particles to enhance the atmosphere, as vanilla light blocks only provide white light.

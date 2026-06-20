@@ -1,7 +1,7 @@
 package me.axlerogue.horrifyinglanterns.item.items;
 
-import me.axlerogue.horrifyinglanterns.entity.BlueLightningBolt;
-import me.axlerogue.horrifyinglanterns.entity.DarkOnesEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.BlueLightningBolt;
+import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
 import me.axlerogue.horrifyinglanterns.item.client.ModEntities;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import net.minecraft.ChatFormatting;

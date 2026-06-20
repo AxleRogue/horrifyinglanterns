@@ -1,6 +1,6 @@
 package me.axlerogue.horrifyinglanterns.item.items;
 
-import me.axlerogue.horrifyinglanterns.handler.SanguineEffectHandler;
+import me.axlerogue.horrifyinglanterns.api.handler.SanguineEffectHandler;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.ChatFormatting;

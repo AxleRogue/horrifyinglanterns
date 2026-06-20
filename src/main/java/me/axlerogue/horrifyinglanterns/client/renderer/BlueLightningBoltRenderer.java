@@ -2,7 +2,7 @@ package me.axlerogue.horrifyinglanterns.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import me.axlerogue.horrifyinglanterns.entity.BlueLightningBolt;
+import me.axlerogue.horrifyinglanterns.api.entity.BlueLightningBolt;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;

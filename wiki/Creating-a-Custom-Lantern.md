@@ -34,6 +34,7 @@ public static final RegistryObject<Item> EMERALD_LANTERN = ITEMS.register("emera
 
 ## What's included?
 By extending `LanternBaseItem`, your lantern automatically gets:
-- **Dynamic Lighting**: Emits light when held and toggled ON.
-- **Custom Arm Pose**: The player holds it with a unique "zombie-like" animation.
+- **Dynamic Lighting**: Emits real light at the player's feet when held and toggled ON.
+- **Atmospheric Tinting**: Spawns colored particles that tint the ground and nearby entities based on your `lightColor`.
+- **Custom Arm Pose**: The player holds it with a unique animation managed by `PlayerAnimationHandler`.
 - **Toggle Support**: Works with the global lantern toggle keybind.

@@ -1,7 +1,7 @@
 package me.axlerogue.horrifyinglanterns.mixin;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import me.axlerogue.horrifyinglanterns.client.LightColorHandler;
+import me.axlerogue.horrifyinglanterns.api.handler.LightColorHandler;
 import net.minecraft.client.renderer.LightTexture;
 import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;

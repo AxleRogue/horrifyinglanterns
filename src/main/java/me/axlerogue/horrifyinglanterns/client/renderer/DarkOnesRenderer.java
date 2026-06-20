@@ -1,7 +1,7 @@
 package me.axlerogue.horrifyinglanterns.client.renderer;
 
 import me.axlerogue.horrifyinglanterns.HorrifyingLanterns;
-import me.axlerogue.horrifyinglanterns.entity.DarkOnesEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

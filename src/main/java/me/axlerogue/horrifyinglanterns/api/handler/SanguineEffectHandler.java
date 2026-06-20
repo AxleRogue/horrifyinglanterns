@@ -1,4 +1,4 @@
-package me.axlerogue.horrifyinglanterns.handler;
+package me.axlerogue.horrifyinglanterns.api.handler;
 
 import me.axlerogue.horrifyinglanterns.HorrifyingLanterns;
 import net.minecraft.world.entity.Entity;

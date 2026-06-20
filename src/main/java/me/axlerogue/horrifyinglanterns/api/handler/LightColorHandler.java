@@ -1,4 +1,4 @@
-package me.axlerogue.horrifyinglanterns.client;
+package me.axlerogue.horrifyinglanterns.api.handler;
 
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import net.minecraft.client.Minecraft;
@@ -36,6 +36,14 @@ public class LightColorHandler {
         }
     }
 
+    public static int getCurrentColor() {
+        return currentColor;
+    }
+
+    public static float getIntensity() {
+        return intensity;
+    }
+
     public static void modifyLightColor(int blockLightLevel, Vector3f color) {
         if (intensity <= 0) return;
 
@@ -47,7 +55,9 @@ public class LightColorHandler {
         // AND don't tint if the light level is 15 (max), which is often used for GUI/Fullbright
         if (blockLightLevel > 0 && blockLightLevel < 15) {
             float ratio = (blockLightLevel / 15f) * intensity;
-            color.lerp(new Vector3f(r, g, b).mul(color.length()), ratio * 0.8f);
+            // Reduce influence of foot-level light block by capping ratio or adjusting mix
+            float mixAmount = Math.min(ratio * 0.8f, 0.6f); 
+            color.lerp(new Vector3f(r, g, b).mul(color.length()), mixAmount);
         }
     }
 }

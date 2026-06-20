@@ -1,8 +1,8 @@
 package me.axlerogue.horrifyinglanterns.item.client;
 
 import me.axlerogue.horrifyinglanterns.HorrifyingLanterns;
-import me.axlerogue.horrifyinglanterns.entity.BlueLightningBolt;
-import me.axlerogue.horrifyinglanterns.entity.DarkOnesEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.BlueLightningBolt;
+import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;

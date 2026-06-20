@@ -21,13 +21,15 @@ import com.mojang.logging.LogUtils;
 import me.axlerogue.horrifyinglanterns.client.renderer.BlueLightningBoltRenderer;
 import me.axlerogue.horrifyinglanterns.client.renderer.DarkOnesRenderer;
 import me.axlerogue.horrifyinglanterns.client.screen.ModConfigScreen;
-import me.axlerogue.horrifyinglanterns.entity.DarkOnesEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
 import me.axlerogue.horrifyinglanterns.item.client.ModEntities;
 import me.axlerogue.horrifyinglanterns.item.client.ModCreativeModeTabs;
 import me.axlerogue.horrifyinglanterns.item.client.ModItems;
 import me.axlerogue.horrifyinglanterns.network.ModPackets;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
+import me.axlerogue.horrifyinglanterns.api.handler.LightHandler;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -76,6 +78,11 @@ public class HorrifyingLanterns {
 
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new ConfigScreenHandler.ConfigScreenFactory((mc, lastScreen) -> new ModConfigScreen(lastScreen)));
+        
+        modEventBus.addListener(this::clientSetup);
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

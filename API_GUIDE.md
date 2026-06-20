@@ -47,10 +47,29 @@ ItemProperties.register(MY_CUSTOM_LANTERN.get(),
 
 ## Features provided by the API
 
-- **Light Emission**: Any item extending `LanternBaseItem` will automatically emit light when held and "lit".
-- **Toggle Mechanism**: Use the default keybind (standard is 'G') to toggle your lantern.
-- **Custom Light Color**: Define the `lightColor` in your lantern's constructor.
-- **Arm Animation**: The player's arm will automatically use the custom lantern holding animation when holding your item.
+- **Light Emission**: Any item extending `LanternBaseItem` will automatically emit light when held and "lit". Handled by `me.axlerogue.horrifyinglanterns.api.handler.LightHandler`.
+- **Toggle Mechanism**: Use the default keybind (standard is 'L') to toggle your lantern. Key mappings are available in `me.axlerogue.horrifyinglanterns.api.client.LanternKeyMappings`.
+- **Abilities**: Custom lanterns can trigger abilities using `me.axlerogue.horrifyinglanterns.api.ability.AbilityType` (BURST, LEECH). Cooldowns and action bar messages are handled automatically.
+- **Custom Light Color**: Define the `lightColor` in your lantern's constructor. Handled by `me.axlerogue.horrifyinglanterns.api.handler.LightColorHandler`.
+- **Arm Animation**: The player's arm will automatically use the custom lantern holding animation. Handled by `me.axlerogue.horrifyinglanterns.api.handler.PlayerAnimationHandler`.
+- **Entities**: Base entity classes like `DarkOnesEntity` and `BlueLightningBolt` are available in `me.axlerogue.horrifyinglanterns.api.entity`.
+- **Entity Tinting**: The API automatically handles tinting nearby mobs and animals with colored particles when a player holds a lit lantern.
+
+## Advanced Integration
+
+### Key Mappings
+You can access the mod's key mappings via `LanternKeyMappings`:
+- `TOGGLE_LANTERN`
+- `LANTERN_BURST`
+- `LANTERN_LEECH`
+
+### Handlers
+The API provides several handlers that you can use or reference:
+- `LightHandler`: Manages block-based dynamic lighting and entity particle effects.
+- `LightColorHandler`: Manages colored lighting effects and provides color/intensity data.
+- `LanternInteractionHandler`: Manages player interactions and restrictions while holding lanterns.
+- `PlayerAnimationHandler`: Manages custom arm animations.
+- `SanguineEffectHandler`: Manages special effects for sanguine-themed items.
 
 ## Notes
 

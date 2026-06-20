@@ -11,3 +11,9 @@ This wiki provides comprehensive documentation and code examples for developers 
 
 ## Overview
 Horrifying Lanterns is designed to be extensible. By using our `LanternBaseItem` API, you can add new mystical lanterns that integrate perfectly with the mod's dynamic lighting and animation systems.
+
+### Key Features
+- **Dynamic Lighting**: Real-time light block placement at the player's feet for consistent performance and visuals.
+- **Atmospheric Tinting**: Colored particle systems that tint the environment and nearby entities.
+- **Ability System**: Integrated support for active abilities with cooldowns and notifications.
+- **Animations**: Custom hand-holding animations for players carrying lanterns.

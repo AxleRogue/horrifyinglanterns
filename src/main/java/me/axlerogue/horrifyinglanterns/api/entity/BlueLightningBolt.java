@@ -1,4 +1,4 @@
-package me.axlerogue.horrifyinglanterns.entity;
+package me.axlerogue.horrifyinglanterns.api.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

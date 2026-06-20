@@ -1,4 +1,4 @@
-package me.axlerogue.horrifyinglanterns.entity;
+package me.axlerogue.horrifyinglanterns.api.entity;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;

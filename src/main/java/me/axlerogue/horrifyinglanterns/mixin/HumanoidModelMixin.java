@@ -1,6 +1,6 @@
 package me.axlerogue.horrifyinglanterns.mixin;
 
-import me.axlerogue.horrifyinglanterns.client.PlayerAnimationHandler;
+import me.axlerogue.horrifyinglanterns.api.handler.PlayerAnimationHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;

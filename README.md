@@ -35,8 +35,9 @@ A lantern that harnesses the power of the dark abyss and the storm. It glows wit
 The mod is highly configurable via the in-game config screen (found in the Mod List) or the `horrifyinglanterns-common.toml` file.
 
 *   **Light Level**: Adjust the brightness of the lantern's light (0-15).
-*   **Light Radius**: Change how far the dynamic light reaches (1.0-16.0 blocks).
-*   **Lucent Integration**: If the **Lucent** mod is installed, lanterns will provide true colored dynamic lighting for an even more immersive experience.
+*   **Abilities**: Each lantern has two unique abilities (Burst and Leech) with cooldowns (10s and 5s).
+*   **Lighting System**: A custom block-based system provides real light at the player's feet.
+*   **Atmospheric Tinting**: Colored particles provide an immersive glow on the ground and entities.
 
 ---
 
@@ -54,9 +55,10 @@ Horrifying Lanterns provides a public API for addon creators. You can create you
 
 ### Features provided by the API:
 *   Automatic dynamic lighting when held.
-*   Automatic "zombie-arm" holding animation.
+*   Automatic custom arm holding animation.
 *   Easy color customization via `lightColor`.
 *   Built-in toggle mechanism (standard keybind 'L').
+*   Full access to key mappings, abilities, entities, and handlers.
 
 Check out the `API_GUIDE.md` in the mod files for a full tutorial and code examples.
 

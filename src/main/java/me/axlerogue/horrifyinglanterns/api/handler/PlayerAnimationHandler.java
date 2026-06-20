@@ -1,4 +1,4 @@
-package me.axlerogue.horrifyinglanterns.client;
+package me.axlerogue.horrifyinglanterns.api.handler;
 
 import me.axlerogue.horrifyinglanterns.HorrifyingLanterns;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
