@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:blackstone" },
+    { "item": "minecraft:ink_sac" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:glass" },
+    { "item": "minecraft:blaze_powder" }
+  ],
+  "result": {
+    "item": "horrifyinglanterns:sanguine_moon_lantern"
+  }
+}

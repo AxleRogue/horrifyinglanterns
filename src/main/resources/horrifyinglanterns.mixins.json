@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.axlerogue.horrifyinglanterns.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "horrifyinglanterns.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "HumanoidModelMixin",
+    "LightTextureMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

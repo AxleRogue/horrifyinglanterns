@@ -1,0 +1,52 @@
+{
+  "display": {
+    "icon": {
+      "item": "horrifyinglanterns:sanguine_moon_lantern"
+    },
+    "title": {
+      "translate": "advancement.horrifyinglanterns.master_of_lanterns"
+    },
+    "description": {
+      "translate": "advancement.horrifyinglanterns.master_of_lanterns.desc"
+    },
+    "background": "horrifyinglanterns:textures/gui/advancements/backgrounds/horror.png",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_sanguine_lantern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "horrifyinglanterns:sanguine_moon_lantern"
+            ]
+          }
+        ]
+      }
+    },
+    "has_dark_skies_lantern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "horrifyinglanterns:dark_skies_lantern"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sanguine_lantern"
+    ],
+    [
+      "has_dark_skies_lantern"
+    ]
+  ]
+}

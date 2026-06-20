@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "horrifyinglanterns:dark_skies_lantern"
+    },
+    "title": {
+      "translate": "advancement.horrifyinglanterns.obtain_dark_skies_lantern"
+    },
+    "description": {
+      "translate": "advancement.horrifyinglanterns.obtain_dark_skies_lantern.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "horrifyinglanterns:master_of_lanterns",
+  "criteria": {
+    "has_lantern": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "horrifyinglanterns:dark_skies_lantern"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

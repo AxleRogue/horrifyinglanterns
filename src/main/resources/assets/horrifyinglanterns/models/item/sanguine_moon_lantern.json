@@ -1,0 +1,11 @@
+{
+	"parent": "horrifyinglanterns:item/sanguine_moon_lantern_extinguished",
+	"overrides": [
+		{
+			"predicate": {
+				"horrifyinglanterns:lit": 1
+			},
+			"model": "horrifyinglanterns:item/sanguine_moon_lantern_lit"
+		}
+	]
+}
