@@ -62,7 +62,8 @@ Check out the `API_GUIDE.md` in the mod files for a full tutorial and code examp
 
 ---
 
-## 📜 Credits
+## 📜 License & Credits
 
+*   **License**: This project is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).
 *   **Created by**: AxleRogue
 *   **Developed with**: Minecraft Forge 1.20.1
