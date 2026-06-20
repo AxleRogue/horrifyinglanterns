@@ -1,0 +1,32 @@
+# Adding Abilities
+
+Lanterns in Horrifying Lanterns can have two types of active abilities: **Burst** and **Leech**.
+
+## Overriding Ability Methods
+
+To add custom logic when a player presses the ability keys (default 'V' for Burst, 'B' for Leech), you can implement custom methods in your lantern class.
+
+*Note: Since these keys are handled by the main mod's network system, you should check for your item specifically in a capability or event, OR override the usage behavior.*
+
+### Example: Custom Burst Logic
+
+```java
+public void performEmeraldBurst(ServerPlayer player, ItemStack stack) {
+    if (!isLit(stack)) return;
+
+    // Apply Luck effect to player
+    player.addEffect(new MobEffectInstance(MobEffects.LUCK, 600, 1));
+    
+    // Play a sound
+    player.level().playSound(null, player.getX(), player.getY(), player.getZ(), 
+        SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 1.0F, 1.0F);
+
+    // Add a cooldown
+    player.getCooldowns().addCooldown(this, 1200); // 60 seconds
+}
+```
+
+## Tips for Abilities
+- **Check `isLit`**: Always ensure the lantern is enabled before allowing an ability to trigger.
+- **Server Side**: Abilities should always be executed on the server side to ensure synchronization.
+- **Cooldowns**: Use `player.getCooldowns().addCooldown()` to prevent spamming powerful effects.
