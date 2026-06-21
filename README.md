@@ -5,10 +5,10 @@ Horrifying Lanterns is a Minecraft mod for version 1.20.1 (Forge) that introduce
 ## 🏮 Key Features
 
 - **Dynamic Lighting**: Lanterns emit light while held in your main hand or off-hand.
-- **Unique Abilities**: Each lantern comes with two distinct active abilities (Burst and Leech).
+- **Unique Abilities**: Each lantern comes with two distinct active abilities (Sanguine Moon: Burst and Leech | Dark Skies: Summon and Wrath).
 - **Custom Animations**: Players holding a lantern will have a unique "zombie-like" arm pose.
 - **Atmospheric Effects**: Colored particles and sounds enhance the horror experience.
-- **Addon API**: A built-in API allows other modders to easily create their own custom lanterns.
+- **Addon API**: A built-in API with base classes for items, abilities, entities, and renderers allows other modders to easily create their own custom lanterns.
 
 ---
 
@@ -24,8 +24,8 @@ A cursed lantern that feeds on the life essence of those around it. It glows wit
 ### 🔵 Dark Skies Lantern
 A lantern that harnesses the power of the dark abyss and the storm. It glows with a dark blue light.
 
-*   **Dark Burst (Key: V)**: Summons **4 Dark Ones** (loyal shadow entities) that hunt down the entity you are currently looking at. If no target is found, they simply guard you. You can only have one set of Dark Ones active at a time.
-*   **Sky Leech (Key: B)**: Strikes the target location (up to 32 blocks away) with a bolt of **Abyssal Lightning**, dealing magic damage to anything caught in the strike.
+*   **Summon (Key: V)**: Summons **4 Dark Ones** (loyal shadow entities) that hunt down the entity you are currently looking at. If no target is found, they simply guard you. You can only have one set of Dark Ones active at a time.
+*   **Wrath (Key: B)**: Strikes the target location (up to 32 blocks away) with a bolt of **Abyssal Lightning**, dealing magic damage to anything caught in the strike.
 *   **Crafting**: Similar to the Sanguine Moon Lantern, but utilizing abyssal materials.
 
 ---
@@ -35,7 +35,8 @@ A lantern that harnesses the power of the dark abyss and the storm. It glows wit
 The mod is highly configurable via the in-game config screen (found in the Mod List) or the `horrifyinglanterns-common.toml` file.
 
 *   **Light Level**: Adjust the brightness of the lantern's light (0-15).
-*   **Abilities**: Each lantern has two unique abilities (Burst and Leech) with cooldowns (10s and 5s).
+*   **Abilities**: Each lantern has two unique abilities with dedicated cooldowns.
+*   **Feedback**: All ability status and cooldown messages are displayed clearly on the action bar.
 *   **Lighting System**: A custom block-based system provides real light at the player's feet.
 *   **Atmospheric Tinting**: Colored particles provide an immersive glow on the ground and entities.
 

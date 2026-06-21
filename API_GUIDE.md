@@ -8,25 +8,39 @@ To create a custom lantern, follow these steps:
 
 ### 1. Create your Lantern Class
 
-Your lantern class must extend `me.axlerogue.horrifyinglanterns.api.LanternBaseItem`.
+Your lantern class must extend `me.axlerogue.horrifyinglanterns.api.LanternBaseItem`. You should register your lantern's abilities in the constructor using `registerAbility()`.
 
 ```java
 public class MyCustomLanternItem extends LanternBaseItem {
     public MyCustomLanternItem(Properties properties) {
         super(properties);
         this.lightColor = 0x00FF00; // Set your lantern's light color (ARGB)
-    }
-
-    // You can override methods like appendHoverText to add tooltips
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
-        tooltip.add(Component.literal("My Custom Lantern Info").withStyle(ChatFormatting.GREEN));
+        
+        // Register your abilities
+        registerAbility(AbilityType.BURST, new MyCustomBurstAbility());
     }
 }
 ```
 
-### 2. Register your Lantern
+### 2. Create your Ability Class
+
+Extend `me.axlerogue.horrifyinglanterns.api.ability.BaseAbility` to create custom functionality.
+
+```java
+public class MyCustomBurstAbility extends BaseAbility {
+    public MyCustomBurstAbility() {
+        super("my_custom_burst", 200); // ID and cooldown in ticks (10s)
+    }
+
+    @Override
+    public void execute(Player player, ItemStack stack) {
+        // Your logic here
+        player.sendSystemMessage(Component.literal("Custom Ability Used!"));
+    }
+}
+```
+
+### 3. Register your Lantern
 
 Register your lantern using standard Forge `DeferredRegister`.
 
@@ -35,25 +49,16 @@ public static final RegistryObject<Item> MY_CUSTOM_LANTERN = ITEMS.register("my_
     () -> new MyCustomLanternItem(new Item.Properties().stacksTo(1)));
 ```
 
-### 3. Register Client-side Properties (Optional)
-
-To make your lantern visually change when toggled on/off, you should register the `lit` property in your mod's client setup.
-
-```java
-ItemProperties.register(MY_CUSTOM_LANTERN.get(),
-    new ResourceLocation("horrifyinglanterns", "lit"),
-    (stack, level, entity, seed) -> LanternBaseItem.isLit(stack) ? 1.0F : 0.0F);
-```
-
 ## Features provided by the API
 
-- **Light Emission**: Any item extending `LanternBaseItem` will automatically emit light when held and "lit". Handled by `me.axlerogue.horrifyinglanterns.api.handler.LightHandler`.
-- **Toggle Mechanism**: Use the default keybind (standard is 'L') to toggle your lantern. Key mappings are available in `me.axlerogue.horrifyinglanterns.api.client.LanternKeyMappings`.
-- **Abilities**: Custom lanterns can trigger abilities using `me.axlerogue.horrifyinglanterns.api.ability.AbilityType` (BURST, LEECH). Cooldowns and action bar messages are handled automatically.
-- **Custom Light Color**: Define the `lightColor` in your lantern's constructor. Handled by `me.axlerogue.horrifyinglanterns.api.handler.LightColorHandler`.
-- **Arm Animation**: The player's arm will automatically use the custom lantern holding animation. Handled by `me.axlerogue.horrifyinglanterns.api.handler.PlayerAnimationHandler`.
-- **Entities**: Base entity classes like `DarkOnesEntity` and `BlueLightningBolt` are available in `me.axlerogue.horrifyinglanterns.api.entity`.
-- **Entity Tinting**: The API automatically handles tinting nearby mobs and animals with colored particles when a player holds a lit lantern.
+- **Light Emission**: Any item extending `LanternBaseItem` will automatically emit light when held and "lit".
+- **Ability System**: Use `BaseAbility` and `AbilityType` (BURST, LEECH, SUMMON, WRATH) to add complex behaviors. Cooldowns and action bar messages are managed by the base classes.
+- **Base Entities**: Extend `BaseEntity` or `BaseLivingEntity` for custom lantern-related entities.
+- **Base Renderers**: Extend `BaseEntityRenderer` or `BaseLivingEntityRenderer` for your entity's visuals.
+- **Base KeyMappings**: Use `BaseKeyMapping` for custom input handling.
+- **Toggle Mechanism**: Use the default keybind (standard is 'L') to toggle your lantern.
+- **Arm Animation**: The player's arm will automatically use the custom lantern holding animation.
+- **Entity Tinting**: The API automatically handles tinting nearby mobs with colored particles.
 
 ## Advanced Integration
 
@@ -62,14 +67,14 @@ You can access the mod's key mappings via `LanternKeyMappings`:
 - `TOGGLE_LANTERN`
 - `LANTERN_BURST`
 - `LANTERN_LEECH`
+- `LANTERN_SUMMON`
+- `LANTERN_WRATH`
 
-### Handlers
-The API provides several handlers that you can use or reference:
-- `LightHandler`: Manages block-based dynamic lighting and entity particle effects.
-- `LightColorHandler`: Manages colored lighting effects and provides color/intensity data.
-- `LanternInteractionHandler`: Manages player interactions and restrictions while holding lanterns.
-- `PlayerAnimationHandler`: Manages custom arm animations.
-- `SanguineEffectHandler`: Manages special effects for sanguine-themed items.
+### Base Classes for Extension
+- `BaseAbility`: Logic for lantern powers.
+- `BaseEntity` / `BaseLivingEntity`: Custom entities.
+- `BaseEntityRenderer` / `BaseLivingEntityRenderer`: Entity rendering.
+- `BaseKeyMapping`: Custom keybinds.
 
 ## Notes
 

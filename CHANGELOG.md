@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-06-20
+### Added
+- New `SUMMON` and `WRATH` ability types for Dark Skies Lantern.
+- Modular ability system using `BaseAbility` classes.
+- API base classes: `BaseEntity`, `BaseLivingEntity`, `BaseEntityRenderer`, `BaseLivingEntityRenderer`, and `BaseKeyMapping`.
+- Standardized action bar feedback for all abilities and cooldowns.
+
+### Changed
+- Refactored `DarkSkiesLanternItem` to use the new Summon and Wrath abilities.
+- Relocated and renamed existing Dark Skies Lantern logic to align with new ability types.
+- Updated `LanternBaseItem` to include an internal ability registry for easier extension.
+- Moved ability feedback (cooldowns, status) from network packets to item/ability classes for better encapsulation.
+
 ## [1.0.1] - 2026-06-20
 ### Added
 - AGPL-3.0 license file and headers.

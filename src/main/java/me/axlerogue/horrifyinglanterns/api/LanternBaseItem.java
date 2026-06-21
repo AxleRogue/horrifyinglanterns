@@ -17,8 +17,12 @@
  */
 package me.axlerogue.horrifyinglanterns.api;
 
+import me.axlerogue.horrifyinglanterns.api.ability.BaseAbility;
+import me.axlerogue.horrifyinglanterns.api.ability.AbilityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Base class for all horrifying lanterns. 
@@ -26,9 +30,14 @@ import net.minecraft.world.item.ItemStack;
  */
 public abstract class LanternBaseItem extends Item {
     protected int lightColor = 0xFFFFFF;
+    protected final Map<AbilityType, BaseAbility> abilities = new HashMap<>();
 
     public LanternBaseItem(Item.Properties properties) {
         super(properties);
+    }
+
+    public BaseAbility getAbility(AbilityType type) {
+        return abilities.get(type);
     }
 
     /**

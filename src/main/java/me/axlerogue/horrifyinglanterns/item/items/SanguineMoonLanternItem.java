@@ -1,5 +1,8 @@
 package me.axlerogue.horrifyinglanterns.item.items;
 
+import me.axlerogue.horrifyinglanterns.api.ability.AbilityType;
+import me.axlerogue.horrifyinglanterns.item.ability.LifeLeechAbility;
+import me.axlerogue.horrifyinglanterns.item.ability.SanguineBurstAbility;
 import me.axlerogue.horrifyinglanterns.api.handler.SanguineEffectHandler;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -42,6 +45,8 @@ public class SanguineMoonLanternItem extends LanternBaseItem {
     public SanguineMoonLanternItem(Properties properties) {
         super(properties);
         this.lightColor = 0xFF0000; // Set to red
+        this.abilities.put(AbilityType.BURST, new SanguineBurstAbility());
+        this.abilities.put(AbilityType.LEECH, new LifeLeechAbility());
     }
 
     @Override
@@ -64,110 +69,5 @@ public class SanguineMoonLanternItem extends LanternBaseItem {
             tooltip.add(Component.translatable("tooltip.horrifyinglanterns.press_shift").withStyle(ChatFormatting.GREEN));
         }
         super.appendHoverText(stack, level, tooltip, flag);
-    }
-
-    public void performLifeLeech(ServerPlayer player, ItemStack stack) {
-        if (!isLit(stack)) {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_disabled"), true);
-            return;
-        }
-
-        if (player.getCooldowns().isOnCooldown(this)) {
-            return;
-        }
-
-        Level level = player.level();
-        AABB area = player.getBoundingBox().inflate(5.0);
-        List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, area, entity -> {
-            if (entity == player) return false;
-            if (entity instanceof Player) return false;
-            if (!entity.canChangeDimensions()) return false; // Basic boss check
-            return true;
-        });
-
-        boolean anyHurt = false;
-        for (LivingEntity target : targets) {
-            float damageAmount = 1.0f;
-            if (target.hurt(target.damageSources().magic(), damageAmount)) {
-                anyHurt = true;
-                AttributeInstance maxHealthAttr = player.getAttribute(Attributes.MAX_HEALTH);
-                if (maxHealthAttr != null) {
-                    double currentExtra = 0;
-                    AttributeModifier oldModifier = maxHealthAttr.getModifier(HEALTH_MODIFIER_UUID);
-                    if (oldModifier != null) {
-                        currentExtra = oldModifier.getAmount();
-                        maxHealthAttr.removeModifier(HEALTH_MODIFIER_UUID);
-                    }
-
-                    double newExtra = currentExtra + 1.0;
-                    if (newExtra > 30.0) {
-                        newExtra = 30.0;
-                    }
-
-                    maxHealthAttr.addPermanentModifier(new AttributeModifier(HEALTH_MODIFIER_UUID, HEALTH_MODIFIER_NAME, newExtra, AttributeModifier.Operation.ADDITION));
-                    player.heal(1.0f);
-
-                    // Particles on target
-                    ((ServerLevel) level).sendParticles(DustParticleOptions.REDSTONE, target.getX(), target.getY() + 1.0, target.getZ(), 10, 0.2, 0.2, 0.2, 0);
-                }
-            }
-        }
-
-        if (anyHurt) {
-            // 2 second cooldown (40 ticks) for life steal nerf
-            player.getCooldowns().addCooldown(this, 40);
-        }
-    }
-
-    public void performSanguineBurst(ServerPlayer player, ItemStack stack) {
-        if (!isLit(stack)) {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_disabled"), true);
-            return;
-        }
-
-        if (player.getCooldowns().isOnCooldown(this)) {
-            float percent = player.getCooldowns().getCooldownPercent(this, 0);
-            int seconds = (int) Math.ceil(percent * 60.0);
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_cooldown", seconds), true);
-            return;
-        }
-
-        triggerSanguineEffect(player);
-        // 60 second cooldown (1200 ticks)
-        player.getCooldowns().addCooldown(this, 1200);
-    }
-
-    private void triggerSanguineEffect(ServerPlayer player) {
-        ServerLevel level = player.serverLevel();
-
-        // Play Wither sound (spawn sound)
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WITHER_SPAWN, SoundSource.PLAYERS, 1.0F, 1.0F);
-
-        // 1. Red dust particles twirling around the player
-        for (int i = 0; i < 360; i += 10) {
-            double rad = Math.toRadians(i);
-            double x = Math.cos(rad) * 1.5;
-            double z = Math.sin(rad) * 1.5;
-            level.sendParticles(new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), 1.5F),
-                    player.getX() + x, player.getY() + 1.0, player.getZ() + z, 1, 0, 0, 0, 0);
-        }
-
-        // 2. Spawn 8 bats around the player
-        for (int i = 0; i < 8; i++) {
-            Bat bat = EntityType.BAT.create(level);
-            if (bat != null) {
-                double angle = i * (Math.PI * 2 / 8);
-                double x = player.getX() + Math.cos(angle) * 2;
-                double z = player.getZ() + Math.sin(angle) * 2;
-                bat.moveTo(x, player.getY() + 1.5, z, level.getRandom().nextFloat() * 360, 0);
-                level.addFreshEntity(bat);
-
-                // 4. Bats disappear after 30 seconds (600 ticks)
-                SanguineEffectHandler.scheduleRemoval(bat, 600);
-            }
-        }
-
-        // 3. Player goes invisible for 30 seconds
-        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 600, 0, false, false, true));
     }
 }

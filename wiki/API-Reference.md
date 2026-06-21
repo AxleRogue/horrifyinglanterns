@@ -12,16 +12,31 @@ The Horrifying Lanterns API is organized into several packages under `me.axlerog
 #### `public int getLightColor()`
 Returns the `lightColor` of the lantern.
 
+#### `public void registerAbility(AbilityType type, BaseAbility ability)`
+Registers a custom ability to the lantern for the specified `AbilityType`.
+
 #### `public static boolean isLit(ItemStack stack)`
 Checks the NBT of the given `ItemStack` to see if the `isLit` tag is true.
 
 #### `public static void toggle(ItemStack stack)`
 Flips the `isLit` NBT tag on the given `ItemStack`.
 
+## New API Base Classes
+
+The API now provides several base classes to simplify content creation:
+
+- **`BaseAbility`**: Logic for active lantern powers. Handles cooldowns and feedback automatically.
+- **`BaseEntity`**: Base for special lantern-summoned entities (extends `LightningBolt`).
+- **`BaseLivingEntity`**: Base for custom living entities (extends `TamableAnimal`).
+- **`BaseEntityRenderer`**: Base for entity renderers.
+- **`BaseLivingEntityRenderer`**: Base for living entity renderers with model support.
+- **`BaseKeyMapping`**: Base for custom key bindings.
+
 ## Client-Side Details
 - **Dynamic Lighting**: Handled automatically via `LightHandler`. Uses `Blocks.LIGHT` placed at the player's feet.
 - **Atmospheric Tinting**: Managed by `LightColorHandler` and `LightHandler` to spawn colored particles on the ground and nearby entities.
 - **Animations**: `PlayerAnimationHandler` applies custom holding poses to any item extending `LanternBaseItem`.
+- **Action Bar Feedback**: All ability messages are displayed on the action bar for better visibility.
 
 ## Handlers API
 Addon developers can reference or utilize the following handlers located in `me.axlerogue.horrifyinglanterns.api.handler`:

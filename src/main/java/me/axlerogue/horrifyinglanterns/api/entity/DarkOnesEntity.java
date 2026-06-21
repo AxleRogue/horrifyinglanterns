@@ -22,9 +22,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class DarkOnesEntity extends TamableAnimal implements FlyingAnimal {
+public class DarkOnesEntity extends BaseLivingEntity implements FlyingAnimal {
 
-    public DarkOnesEntity(EntityType<? extends TamableAnimal> type, Level level) {
+    public DarkOnesEntity(EntityType<? extends DarkOnesEntity> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
     }

@@ -1,5 +1,8 @@
 package me.axlerogue.horrifyinglanterns.item.items;
 
+import me.axlerogue.horrifyinglanterns.api.ability.AbilityType;
+import me.axlerogue.horrifyinglanterns.item.ability.SkyWrathAbility;
+import me.axlerogue.horrifyinglanterns.item.ability.SummonDarkOnesAbility;
 import me.axlerogue.horrifyinglanterns.api.entity.BlueLightningBolt;
 import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
 import me.axlerogue.horrifyinglanterns.item.client.ModEntities;
@@ -32,6 +35,8 @@ public class DarkSkiesLanternItem extends LanternBaseItem {
     public DarkSkiesLanternItem(Properties properties) {
         super(properties);
         this.lightColor = 0x000033; // Dark blue
+        this.abilities.put(AbilityType.SUMMON, new SummonDarkOnesAbility());
+        this.abilities.put(AbilityType.WRATH, new SkyWrathAbility());
     }
 
     @Override
@@ -44,130 +49,5 @@ public class DarkSkiesLanternItem extends LanternBaseItem {
             tooltip.add(Component.translatable("tooltip.horrifyinglanterns.press_shift").withStyle(ChatFormatting.GREEN));
         }
         super.appendHoverText(stack, level, tooltip, flag);
-    }
-
-    public void performDarkBurst(ServerPlayer player, ItemStack stack) {
-        if (!isLit(stack)) {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_disabled"), true);
-            return;
-        }
-
-        Level level = player.level();
-        if (!(level instanceof ServerLevel serverLevel)) return;
-
-        // Check for existing Dark Ones
-        CompoundTag tag = stack.getOrCreateTag();
-        if (tag.contains("DarkOnes", Tag.TAG_LIST)) {
-            ListTag list = tag.getList("DarkOnes", Tag.TAG_COMPOUND);
-            boolean anyAlive = false;
-            for (int i = 0; i < list.size(); i++) {
-                CompoundTag entry = list.getCompound(i);
-                UUID uuid = entry.getUUID("UUID");
-                Entity entity = serverLevel.getEntity(uuid);
-                if (entity != null && entity.isAlive() && entity.getType() == ModEntities.DARK_ONES.get()) {
-                    anyAlive = true;
-                    break;
-                }
-            }
-            
-            if (anyAlive) {
-                player.displayClientMessage(Component.translatable("message.horrifyinglanterns.dark_ones_alive").withStyle(ChatFormatting.RED), true);
-                return;
-            }
-        }
-
-        if (player.getCooldowns().isOnCooldown(this)) {
-            float percent = player.getCooldowns().getCooldownPercent(this, 0);
-            int seconds = (int) Math.ceil(percent * 60.0);
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_cooldown", seconds), true);
-            return;
-        }
-
-        // Particle Burst
-        serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, player.getX(), player.getY() + 1.0, player.getZ(), 50, 0.5, 0.5, 0.5, 0.1);
-        serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, player.getX(), player.getY() + 1.0, player.getZ(), 20, 0.5, 0.5, 0.5, 0.05);
-
-        // Find target (closest living entity within 16 blocks, looking at)
-        HitResult hitResult = player.pick(16.0D, 0.0F, false);
-        LivingEntity target = null;
-        
-        // Try to find a living entity in a small area around the hit location
-        Vec3 hitVec = hitResult.getLocation();
-        AABB searchBox = new AABB(hitVec.subtract(2, 2, 2), hitVec.add(2, 2, 2));
-        List<LivingEntity> nearbyEntities = level.getEntitiesOfClass(LivingEntity.class, searchBox, e -> e != player && e.isAlive());
-        
-        if (!nearbyEntities.isEmpty()) {
-            target = nearbyEntities.get(0);
-        }
-
-        // Summon 4 Dark Ones
-        ListTag darkOnesList = new ListTag();
-        Component customName = Component.literal(player.getName().getString() + "'s Dark One");
-        
-        for (int i = 0; i < 4; i++) {
-            DarkOnesEntity darkOne = ModEntities.DARK_ONES.get().create(serverLevel);
-            if (darkOne != null) {
-                // Spawn in a small circle/offset around player
-                double angle = i * (Math.PI / 2);
-                double offsetX = Math.cos(angle) * 1.5;
-                double offsetZ = Math.sin(angle) * 1.5;
-                
-                darkOne.moveTo(player.getX() + offsetX, player.getY() + 1.0, player.getZ() + offsetZ, player.getYRot(), player.getXRot());
-                darkOne.tame(player);
-                darkOne.setCustomName(customName);
-                darkOne.setCustomNameVisible(true);
-                serverLevel.addFreshEntity(darkOne);
-                
-                if (target != null) {
-                    darkOne.setTarget(target);
-                }
-
-                CompoundTag entityTag = new CompoundTag();
-                entityTag.putUUID("UUID", darkOne.getUUID());
-                darkOnesList.add(entityTag);
-            }
-        }
-        
-        tag.put("DarkOnes", darkOnesList);
-
-        if (target != null) {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.dark_burst_target", target.getDisplayName()).withStyle(ChatFormatting.BLUE), true);
-        } else {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.dark_burst_summoned").withStyle(ChatFormatting.BLUE), true);
-        }
-        
-        // 60 second cooldown (1200 ticks)
-        player.getCooldowns().addCooldown(this, 1200);
-    }
-
-    public void performSkyLeech(ServerPlayer player, ItemStack stack) {
-        if (!isLit(stack)) {
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_disabled"), true);
-            return;
-        }
-
-        if (player.getCooldowns().isOnCooldown(this)) {
-            return;
-        }
-
-        // Raytrace to find target position (up to 32 blocks)
-        HitResult hitResult = player.pick(32.0D, 0.0F, false);
-        Vec3 targetPos;
-        if (hitResult.getType() != HitResult.Type.MISS) {
-            targetPos = hitResult.getLocation();
-        } else {
-            // If miss, just put it in front of the player
-            targetPos = player.getEyePosition().add(player.getLookAngle().scale(32.0D));
-        }
-
-        BlueLightningBolt lightningBolt = ModEntities.BLUE_LIGHTNING_BOLT.get().create(player.level());
-        if (lightningBolt != null) {
-            lightningBolt.moveTo(targetPos);
-            lightningBolt.setCause(player);
-            player.level().addFreshEntity(lightningBolt);
-        }
-
-        // 2 second cooldown (40 ticks)
-        player.getCooldowns().addCooldown(this, 40);
     }
 }

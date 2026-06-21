@@ -14,7 +14,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class BlueLightningBolt extends LightningBolt {
+public class BlueLightningBolt extends BaseEntity {
     private int life;
     private int flashes;
 

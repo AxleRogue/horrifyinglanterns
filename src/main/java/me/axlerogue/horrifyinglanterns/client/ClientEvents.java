@@ -27,6 +27,12 @@ public class ClientEvents {
             while (KeyHandler.LANTERN_LEECH.consumeClick()) {
                 ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.LEECH));
             }
+            while (KeyHandler.LANTERN_SUMMON.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.SUMMON));
+            }
+            while (KeyHandler.LANTERN_WRATH.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.WRATH));
+            }
         }
     }
 }

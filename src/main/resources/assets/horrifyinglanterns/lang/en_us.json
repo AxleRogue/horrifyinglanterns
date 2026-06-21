@@ -25,15 +25,17 @@
   "chat.horrifyinglanterns.cooldown": "Ability on cooldown!",
   "chat.horrifyinglanterns.burst_used": "Sanguine Burst activated!",
   "chat.horrifyinglanterns.leech_used": "Life Leeching...",
-  "chat.horrifyinglanterns.dark_burst_used": "Dark Burst unleashed!",
-  "chat.horrifyinglanterns.sky_leech_used": "Abyssal Lightning striking!",
+  "chat.horrifyinglanterns.summon_used": "Dark Ones summoned!",
+  "chat.horrifyinglanterns.wrath_used": "Abyssal Lightning striking!",
   "key.horrifyinglanterns.burst": "Lantern Burst Ability",
   "key.horrifyinglanterns.leech": "Lantern Leech Ability",
+  "key.horrifyinglanterns.summon": "Lantern Summon Ability",
+  "key.horrifyinglanterns.wrath": "Lantern Wrath Ability",
   "tooltip.horrifyinglanterns.press_shift": "Press SHIFT for more info",
   "tooltip.horrifyinglanterns.info_1": "A cursed lantern that feeds on life.",
   "tooltip.horrifyinglanterns.info_2": "Press 'V' for Sanguine Burst (Invisibility & Bats).",
   "tooltip.horrifyinglanterns.info_3": "Press 'B' for Life Leech (Drains health from nearby entities).",
   "tooltip.horrifyinglanterns.dark_skies_info_1": "A lantern that harnesses the power of the dark abyss.",
-  "tooltip.horrifyinglanterns.dark_skies_info_2": "Press 'V' for Dark Burst (Summons Dark Ones).",
-  "tooltip.horrifyinglanterns.dark_skies_info_3": "Press 'B' for Sky Leech (Strikes with Abyssal Lightning)."
+  "tooltip.horrifyinglanterns.dark_skies_info_2": "Press 'V' for Summon (Summons Dark Ones).",
+  "tooltip.horrifyinglanterns.dark_skies_info_3": "Press 'B' for Wrath (Strikes with Abyssal Lightning)."
 }

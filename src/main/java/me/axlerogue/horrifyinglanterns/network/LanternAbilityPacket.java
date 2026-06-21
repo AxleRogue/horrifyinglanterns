@@ -1,8 +1,8 @@
 package me.axlerogue.horrifyinglanterns.network;
 
+import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import me.axlerogue.horrifyinglanterns.api.ability.AbilityType;
-import me.axlerogue.horrifyinglanterns.item.items.DarkSkiesLanternItem;
-import me.axlerogue.horrifyinglanterns.item.items.SanguineMoonLanternItem;
+import me.axlerogue.horrifyinglanterns.api.ability.BaseAbility;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -34,68 +34,26 @@ public class LanternAbilityPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player != null) {
-                ItemStack mainHand = player.getMainHandItem();
-                ItemStack offHand = player.getOffhandItem();
-                
-                if (mainHand.getItem() instanceof SanguineMoonLanternItem sanguineItem) {
-                    if (player.getCooldowns().isOnCooldown(sanguineItem)) {
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.cooldown").withStyle(net.minecraft.ChatFormatting.RED), true);
-                        return;
-                    }
-                    if (msg.type == AbilityType.BURST) {
-                        sanguineItem.performSanguineBurst(player, mainHand);
-                        player.getCooldowns().addCooldown(sanguineItem, 200); // 10 seconds
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.burst_used").withStyle(net.minecraft.ChatFormatting.DARK_RED), true);
-                    } else {
-                        sanguineItem.performLifeLeech(player, mainHand);
-                        player.getCooldowns().addCooldown(sanguineItem, 100); // 5 seconds
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.leech_used").withStyle(net.minecraft.ChatFormatting.RED), true);
-                    }
-                } else if (mainHand.getItem() instanceof DarkSkiesLanternItem darkSkiesItem) {
-                    if (player.getCooldowns().isOnCooldown(darkSkiesItem)) {
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.cooldown").withStyle(net.minecraft.ChatFormatting.RED), true);
-                        return;
-                    }
-                    if (msg.type == AbilityType.BURST) {
-                        darkSkiesItem.performDarkBurst(player, mainHand);
-                        player.getCooldowns().addCooldown(darkSkiesItem, 200);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.dark_burst_used").withStyle(net.minecraft.ChatFormatting.BLUE), true);
-                    } else {
-                        darkSkiesItem.performSkyLeech(player, mainHand);
-                        player.getCooldowns().addCooldown(darkSkiesItem, 100);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.sky_leech_used").withStyle(net.minecraft.ChatFormatting.AQUA), true);
-                    }
-                } else if (offHand.getItem() instanceof SanguineMoonLanternItem sanguineItem) {
-                    if (player.getCooldowns().isOnCooldown(sanguineItem)) {
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.cooldown").withStyle(net.minecraft.ChatFormatting.RED), true);
-                        return;
-                    }
-                    if (msg.type == AbilityType.BURST) {
-                        sanguineItem.performSanguineBurst(player, offHand);
-                        player.getCooldowns().addCooldown(sanguineItem, 200);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.burst_used").withStyle(net.minecraft.ChatFormatting.DARK_RED), true);
-                    } else {
-                        sanguineItem.performLifeLeech(player, offHand);
-                        player.getCooldowns().addCooldown(sanguineItem, 100);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.leech_used").withStyle(net.minecraft.ChatFormatting.RED), true);
-                    }
-                } else if (offHand.getItem() instanceof DarkSkiesLanternItem darkSkiesItem) {
-                    if (player.getCooldowns().isOnCooldown(darkSkiesItem)) {
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.cooldown").withStyle(net.minecraft.ChatFormatting.RED), true);
-                        return;
-                    }
-                    if (msg.type == AbilityType.BURST) {
-                        darkSkiesItem.performDarkBurst(player, offHand);
-                        player.getCooldowns().addCooldown(darkSkiesItem, 200);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.dark_burst_used").withStyle(net.minecraft.ChatFormatting.BLUE), true);
-                    } else {
-                        darkSkiesItem.performSkyLeech(player, offHand);
-                        player.getCooldowns().addCooldown(darkSkiesItem, 100);
-                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.sky_leech_used").withStyle(net.minecraft.ChatFormatting.AQUA), true);
-                    }
-                }
+                executeAbility(player, player.getMainHandItem(), msg.type);
+                executeAbility(player, player.getOffhandItem(), msg.type);
             }
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    private static void executeAbility(ServerPlayer player, ItemStack stack, AbilityType type) {
+        if (stack.getItem() instanceof LanternBaseItem lantern) {
+            BaseAbility ability = lantern.getAbility(type);
+            if (ability != null) {
+                ability.execute(player, stack);
+                
+                // Keep the specific messages for Sanguine Lantern as requested in previous sessions
+                if (type == AbilityType.BURST && lantern instanceof me.axlerogue.horrifyinglanterns.item.items.SanguineMoonLanternItem) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.burst_used").withStyle(net.minecraft.ChatFormatting.DARK_RED), true);
+                } else if (type == AbilityType.LEECH && lantern instanceof me.axlerogue.horrifyinglanterns.item.items.SanguineMoonLanternItem) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.leech_used").withStyle(net.minecraft.ChatFormatting.RED), true);
+                }
+            }
+        }
     }
 }

@@ -2,10 +2,10 @@ package me.axlerogue.horrifyinglanterns.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import me.axlerogue.horrifyinglanterns.api.client.renderer.BaseEntityRenderer;
 import me.axlerogue.horrifyinglanterns.api.entity.BlueLightningBolt;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
-public class BlueLightningBoltRenderer extends EntityRenderer<BlueLightningBolt> {
+public class BlueLightningBoltRenderer extends BaseEntityRenderer<BlueLightningBolt> {
    public BlueLightningBoltRenderer(EntityRendererProvider.Context context) {
       super(context);
    }
