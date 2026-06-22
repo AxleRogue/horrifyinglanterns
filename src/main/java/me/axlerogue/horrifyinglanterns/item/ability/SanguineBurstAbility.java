@@ -30,9 +30,7 @@ public class SanguineBurstAbility extends BaseAbility {
         }
 
         if (isOnCooldown(player, stack.getItem())) {
-            float percent = player.getCooldowns().getCooldownPercent(stack.getItem(), 0);
-            int seconds = (int) Math.ceil(percent * (getCooldownTicks() / 20.0));
-            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_cooldown", seconds), true);
+            player.displayClientMessage(Component.translatable("message.horrifyinglanterns.ability_on_cooldown", getDisplayName()), true);
             return;
         }
 

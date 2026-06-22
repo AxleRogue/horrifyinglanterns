@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-06-22
+### Added
+- **Servant of the Dark Heart**: A new tamable, flying, and invulnerable entity that carries tethered lanterns for the player when their inventory is full.
+  - Automatically summoned when a tethered lantern is dropped (e.g., from a broken chest or manually tossed).
+  - Displays the carried lantern in hand with a unique animation.
+  - Automatically returns the lantern to the player's inventory when space becomes available.
+  - Always displays its nametag above its head.
+- **Lantern Tethering Enhancements**:
+  - Prevented lantern storage in Ender Chests to ensure dark energy remains within the physical world.
+  - Improved logic for returning tethered items to owners upon death or world events.
+- Added carrying animations and inventory support for the Servant of the Dark Heart.
+
+### Changed
+- Removed the experimental "Tethered Heart" GUI and related configuration settings.
+- Increased default lantern storage reliability.
+
 ## [1.0.2] - 2026-06-20
 ### Added
 - New `SUMMON` and `WRATH` ability types for Dark Skies Lantern.

@@ -43,16 +43,14 @@ public class LanternAbilityPacket {
 
     private static void executeAbility(ServerPlayer player, ItemStack stack, AbilityType type) {
         if (stack.getItem() instanceof LanternBaseItem lantern) {
+            LanternBaseItem.checkAndSetOwner(stack, player);
+            if (!LanternBaseItem.isOwner(stack, player)) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.horrifyinglanterns.not_owner"), true);
+                return;
+            }
             BaseAbility ability = lantern.getAbility(type);
             if (ability != null) {
                 ability.execute(player, stack);
-                
-                // Keep the specific messages for Sanguine Lantern as requested in previous sessions
-                if (type == AbilityType.BURST && lantern instanceof me.axlerogue.horrifyinglanterns.item.items.SanguineMoonLanternItem) {
-                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.burst_used").withStyle(net.minecraft.ChatFormatting.DARK_RED), true);
-                } else if (type == AbilityType.LEECH && lantern instanceof me.axlerogue.horrifyinglanterns.item.items.SanguineMoonLanternItem) {
-                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("chat.horrifyinglanterns.leech_used").withStyle(net.minecraft.ChatFormatting.RED), true);
-                }
             }
         }
     }

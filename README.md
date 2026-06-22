@@ -6,7 +6,9 @@ Horrifying Lanterns is a Minecraft mod for version 1.20.1 (Forge) that introduce
 
 - **Dynamic Lighting**: Lanterns emit light while held in your main hand or off-hand.
 - **Unique Abilities**: Each lantern comes with two distinct active abilities (Sanguine Moon: Burst and Leech | Dark Skies: Summon and Wrath).
-- **Custom Animations**: Players holding a lantern will have a unique "zombie-like" arm pose.
+- **Tethering System**: Lanterns are bound to their owner. If dropped, lost in a broken chest, or the owner dies, the lantern will attempt to return to the owner's inventory.
+- **Servant of the Dark Heart**: If your inventory is full, a loyal, invulnerable spectral servant will appear to carry your tethered lanterns for you, following you until you have space to take them back.
+- **Custom Animations**: Players and Servants holding a lantern will have a unique "zombie-like" arm pose.
 - **Atmospheric Effects**: Colored particles and sounds enhance the horror experience.
 - **Addon API**: A built-in API with base classes for items, abilities, entities, and renderers allows other modders to easily create their own custom lanterns.
 

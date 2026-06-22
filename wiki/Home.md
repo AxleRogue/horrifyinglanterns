@@ -16,4 +16,5 @@ Horrifying Lanterns is designed to be extensible. By using our `LanternBaseItem`
 - **Dynamic Lighting**: Real-time light block placement at the player's feet for consistent performance and visuals.
 - **Atmospheric Tinting**: Colored particle systems that tint the environment and nearby entities.
 - **Ability System**: Integrated support for active abilities with cooldowns and notifications.
-- **Animations**: Custom hand-holding animations for players carrying lanterns.
+- **Animations**: Custom hand-holding animations for players and servants carrying lanterns.
+- **Tethering & Servants**: Automatic item retrieval system with invulnerable spectral servants that carry overflow items for players.

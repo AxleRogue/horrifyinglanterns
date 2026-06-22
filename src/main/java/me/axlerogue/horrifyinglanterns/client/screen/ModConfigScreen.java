@@ -43,7 +43,7 @@ public class ModConfigScreen extends Screen {
         this.addRenderableWidget(Button.builder(Component.translatable("gui.done"), (button) -> {
             Config.SPEC.save();
             this.minecraft.setScreen(this.lastScreen);
-        }).pos(this.width / 2 - 100, y + 75).size(200, 20).build());
+        }).pos(this.width / 2 - 100, y + 50).size(200, 20).build());
     }
 
     @Override

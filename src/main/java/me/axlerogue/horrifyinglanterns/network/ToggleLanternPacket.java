@@ -38,6 +38,12 @@ public class ToggleLanternPacket {
                 }
 
                 if (!itemToToggle.isEmpty()) {
+                    LanternBaseItem.checkAndSetOwner(itemToToggle, player);
+                    if (!LanternBaseItem.isOwner(itemToToggle, player)) {
+                        player.displayClientMessage(Component.translatable("message.horrifyinglanterns.not_owner"), true);
+                        return;
+                    }
+                    
                     if (player.getCooldowns().isOnCooldown(itemToToggle.getItem())) {
                         float percent = player.getCooldowns().getCooldownPercent(itemToToggle.getItem(), 0);
                         int seconds = (int) Math.ceil(percent * 15.0); // 15 seconds total cooldown

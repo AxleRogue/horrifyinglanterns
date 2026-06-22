@@ -20,8 +20,10 @@ package me.axlerogue.horrifyinglanterns;
 import com.mojang.logging.LogUtils;
 import me.axlerogue.horrifyinglanterns.client.renderer.BlueLightningBoltRenderer;
 import me.axlerogue.horrifyinglanterns.client.renderer.DarkOnesRenderer;
+import me.axlerogue.horrifyinglanterns.client.renderer.ServantOfTheDarkHeartRenderer;
 import me.axlerogue.horrifyinglanterns.client.screen.ModConfigScreen;
 import me.axlerogue.horrifyinglanterns.api.entity.DarkOnesEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.ServantOfTheDarkHeartEntity;
 import me.axlerogue.horrifyinglanterns.item.client.ModEntities;
 import me.axlerogue.horrifyinglanterns.item.client.ModCreativeModeTabs;
 import me.axlerogue.horrifyinglanterns.item.client.ModItems;
@@ -29,6 +31,7 @@ import me.axlerogue.horrifyinglanterns.network.ModPackets;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import me.axlerogue.horrifyinglanterns.api.handler.LightHandler;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -93,6 +96,7 @@ public class HorrifyingLanterns {
     @SubscribeEvent
     public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         event.put(ModEntities.DARK_ONES.get(), DarkOnesEntity.createAttributes().build());
+        event.put(ModEntities.SERVANT_OF_THE_DARK_HEART.get(), ServantOfTheDarkHeartEntity.createAttributes().build());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -120,6 +124,7 @@ public class HorrifyingLanterns {
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntities.BLUE_LIGHTNING_BOLT.get(), BlueLightningBoltRenderer::new);
             event.registerEntityRenderer(ModEntities.DARK_ONES.get(), DarkOnesRenderer::new);
+            event.registerEntityRenderer(ModEntities.SERVANT_OF_THE_DARK_HEART.get(), ServantOfTheDarkHeartRenderer::new);
         }
     }
 }
