@@ -27,6 +27,7 @@ import me.axlerogue.horrifyinglanterns.api.entity.ServantOfTheDarkHeartEntity;
 import me.axlerogue.horrifyinglanterns.item.client.ModEntities;
 import me.axlerogue.horrifyinglanterns.item.client.ModCreativeModeTabs;
 import me.axlerogue.horrifyinglanterns.item.client.ModItems;
+import me.axlerogue.horrifyinglanterns.sound.ModSounds;
 import me.axlerogue.horrifyinglanterns.network.ModPackets;
 import me.axlerogue.horrifyinglanterns.api.LanternBaseItem;
 import me.axlerogue.horrifyinglanterns.api.handler.LightHandler;
@@ -65,6 +66,7 @@ public class HorrifyingLanterns {
 
         ModCreativeModeTabs.register(modEventBus);
 
+        ModSounds.register(modEventBus);
         ModItems.register(modEventBus);
         ModEntities.register(modEventBus);
 

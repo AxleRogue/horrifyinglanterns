@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2026-06-23
+### Added
+- **Community Support**: Created `ISSUE_TRACKER.md` with contribution guidelines, reporting rules, and issue labels.
+- **Custom Sounds**: Integrated new atmospheric sounds for Dark Ones and Servants of the Dark Heart.
+  - Added `minion_idle` (breathing) and `minion_attack` (random screech) sound events.
+  - Added localized subtitles for minion sounds.
+- Updated `README.md` to include custom sound documentation and links to the issue tracker.
+
+### Changed
+- Set the breathing sound as the death sound for both Dark Ones and Servants of the Dark Heart.
+
+### Fixed
+- Fixed a bug where lanterns would duplicate if the player died in a different dimension than their current one.
+- Improved tethering logic to ensure lanterns are properly removed from the world after being returned to the player.
+- Fixed an issue where custom sounds were not playing due to incorrect file naming conventions.
+
 ## [1.0.3] - 2026-06-22
 ### Added
 - **Servant of the Dark Heart**: A new tamable, flying, and invulnerable entity that carries tethered lanterns for the player when their inventory is full.

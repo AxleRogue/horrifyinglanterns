@@ -46,5 +46,7 @@
   "tooltip.horrifyinglanterns.info_3": "Press 'B' for Life Leech (Drains health from nearby entities).",
   "tooltip.horrifyinglanterns.dark_skies_info_1": "A lantern that harnesses the power of the dark abyss.",
   "tooltip.horrifyinglanterns.dark_skies_info_2": "Press 'V' for Summon (Summons Dark Ones).",
-  "tooltip.horrifyinglanterns.dark_skies_info_3": "Press 'B' for Wrath (Strikes with Abyssal Lightning)."
+  "tooltip.horrifyinglanterns.dark_skies_info_3": "Press 'B' for Wrath (Strikes with Abyssal Lightning).",
+  "horrifyinglanterns.subtitle.minion_idle": "Minion breathes",
+  "horrifyinglanterns.subtitle.minion_attack": "Minion screeches"
 }

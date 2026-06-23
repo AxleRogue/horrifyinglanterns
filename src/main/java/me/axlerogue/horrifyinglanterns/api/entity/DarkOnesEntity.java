@@ -1,5 +1,6 @@
 package me.axlerogue.horrifyinglanterns.api.entity;
 
+import me.axlerogue.horrifyinglanterns.sound.ModSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -107,17 +108,17 @@ public class DarkOnesEntity extends BaseLivingEntity implements FlyingAnimal {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.GHAST_AMBIENT;
+        return ModSounds.MINION_IDLE.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.WITHER_HURT;
+        return ModSounds.MINION_ATTACK.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.GHAST_DEATH;
+        return ModSounds.MINION_IDLE.get();
     }
 
     @Override

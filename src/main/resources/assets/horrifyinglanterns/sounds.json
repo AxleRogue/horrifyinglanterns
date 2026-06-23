@@ -1,0 +1,17 @@
+{
+  "minion_idle": {
+    "subtitle": "horrifyinglanterns.subtitle.minion_idle",
+    "sounds": [
+      "horrifyinglanterns:minions/breathing"
+    ]
+  },
+  "minion_attack": {
+    "subtitle": "horrifyinglanterns.subtitle.minion_attack",
+    "sounds": [
+      "horrifyinglanterns:minions/screech_1",
+      "horrifyinglanterns:minions/screech_2",
+      "horrifyinglanterns:minions/screech_3",
+      "horrifyinglanterns:minions/screech_4"
+    ]
+  }
+}

@@ -1,10 +1,12 @@
 package me.axlerogue.horrifyinglanterns.api.entity;
 
+import me.axlerogue.horrifyinglanterns.sound.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -146,6 +148,16 @@ public class ServantOfTheDarkHeartEntity extends BaseLivingEntity implements Fly
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.MINION_IDLE.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.MINION_IDLE.get();
     }
 
     @Override

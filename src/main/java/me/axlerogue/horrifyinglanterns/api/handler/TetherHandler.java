@@ -78,7 +78,8 @@ public class TetherHandler {
                 if (stack.getItem() instanceof LanternBaseItem) {
                     if (LanternBaseItem.isOwner(stack, oldPlayer)) {
                         newPlayer.getInventory().add(stack.copy());
-                        // We will also handle the drops event to prevent duplication
+                        // Clear the item from the old inventory to be sure
+                        oldPlayer.getInventory().setItem(i, ItemStack.EMPTY);
                     }
                 }
             }
@@ -145,14 +146,16 @@ public class TetherHandler {
             if (stack.getItem() instanceof LanternBaseItem && stack.hasTag() && stack.getTag().contains("Owner")) {
                 UUID ownerUUID = stack.getTag().getUUID("Owner");
                 Player player = event.getLevel().getPlayerByUUID(ownerUUID);
-                if (player != null) {
+                if (player != null && player.isAlive()) {
                     // Try to give to player
                     if (player.getInventory().add(stack.copy())) {
                         event.setCanceled(true);
+                        itemEntity.discard();
                     } else {
                         // Inventory full, summon servant
                         summonServant(player, stack);
                         event.setCanceled(true);
+                        itemEntity.discard();
                     }
                 }
             }
