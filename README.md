@@ -29,8 +29,7 @@ A lantern that harnesses the power of the dark abyss and the storm. It glows wit
 
 *   **Summon (Key: V)**: Summons **4 Dark Ones** (loyal shadow entities) that hunt down the entity you are currently looking at. If no target is found, they simply guard you. You can only have one set of Dark Ones active at a time.
 *   **Wrath (Key: B)**: Strikes the target location (up to 32 blocks away) with a bolt of **Abyssal Lightning**, dealing magic damage to anything caught in the strike.
-*   **Crafting**: Similar to the Sanguine Moon Lantern, but utilizing abyssal materials.
-
+*   **Crafting**: Blackstone, Ink Sac, Amethyst Block, Glass, and Blaze Powder.
 ---
 
 ## ⚙️ Configuration
