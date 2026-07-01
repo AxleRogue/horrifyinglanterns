@@ -49,6 +49,15 @@ The API provides four standard ability types, each with its own default keybindi
 - `SUMMON` (Key: V - used by Dark Skies style lanterns)
 - `WRATH` (Key: B - used by Dark Skies style lanterns)
 
+## Built-in Abilities
+If you want to use the mod's native abilities for your own custom lanterns, they are available in `me.axlerogue.horrifyinglanterns.item.ability`:
+- **`LifeLeechAbility`**: Drains health from nearby entities to increase the owner's maximum health.
+- **`PoisonAOEAbility`**: Releases a toxic cloud inflicting Poison II on nearby living entities.
+- **`SpiderPacificationAbility`**: Calms spiders in the area, removing their aggression towards the player and causing them to scatter away in fear.
+- **`SanguineBurstAbility`**: Explodes outwards, dealing damage and pushing enemies away from the user.
+- **`SkyWrathAbility`**: Summons a custom blue lightning bolt `BlueLightningBolt` at the targeted entity or block.
+- **`SummonDarkOnesAbility`**: Summons `DarkOnesEntity` minions to attack your enemies.
+
 ## Tips for Abilities
 - **Base Logic**: `BaseAbility` automatically handles cooldown management and checking if the lantern is enabled.
 - **Action Bar Messages**: All feedback (cooldowns, usage) is automatically sent to the player's action bar.

@@ -17,6 +17,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.item.ItemEntity;
+import me.axlerogue.horrifyinglanterns.api.entity.goal.ServantFindLanternGoal;
+import me.axlerogue.horrifyinglanterns.api.entity.goal.ServantFetchLanternGoal;
+import me.axlerogue.horrifyinglanterns.api.entity.goal.ServantFollowOwnerWaitGoal;
+import me.axlerogue.horrifyinglanterns.api.entity.goal.ServantReturnLanternGoal;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -28,6 +33,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class ServantOfTheDarkHeartEntity extends BaseLivingEntity implements FlyingAnimal {
+    public ItemEntity targetLanternItem;
+
     public ServantOfTheDarkHeartEntity(EntityType<? extends ServantOfTheDarkHeartEntity> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
@@ -36,11 +43,13 @@ public class ServantOfTheDarkHeartEntity extends BaseLivingEntity implements Fly
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0D, 5.0F, 1.0F, false));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(2, new ServantReturnLanternGoal(this));
+        this.goalSelector.addGoal(3, new ServantFetchLanternGoal(this));
+        this.goalSelector.addGoal(4, new ServantFindLanternGoal(this));
+        this.goalSelector.addGoal(5, new ServantFollowOwnerWaitGoal(this));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -101,18 +110,6 @@ public class ServantOfTheDarkHeartEntity extends BaseLivingEntity implements Fly
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide && this.tickCount % 20 == 0) {
-            LivingEntity owner = this.getOwner();
-            if (owner instanceof Player player && !player.isSpectator()) {
-                ItemStack lantern = this.getLantern();
-                if (!lantern.isEmpty()) {
-                    if (player.getInventory().add(lantern)) {
-                        this.setLantern(ItemStack.EMPTY);
-                        this.discard();
-                    }
-                }
-            }
-        }
     }
 
     @Override

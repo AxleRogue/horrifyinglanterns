@@ -39,11 +39,21 @@ public class ModConfigScreen extends Screen {
             button.setMessage(Component.translatable("screen.horrifyinglanterns.config.light_radius", next));
         }).pos(this.width / 2 - 100, y + 25).size(200, 20).build());
 
+        // Auto-Extinguish Button
+        this.addRenderableWidget(Button.builder(Component.translatable("screen.horrifyinglanterns.config.auto_extinguish", Config.AUTO_EXTINGUISH_MINUTES.get()), (button) -> {
+            int current = Config.AUTO_EXTINGUISH_MINUTES.get();
+            int next = current + 1;
+            if (next > 60) next = 1;
+            Config.AUTO_EXTINGUISH_MINUTES.set(next);
+            Config.autoExtinguishMinutes = next;
+            button.setMessage(Component.translatable("screen.horrifyinglanterns.config.auto_extinguish", next));
+        }).pos(this.width / 2 - 100, y + 50).size(200, 20).build());
+
         // Done button
         this.addRenderableWidget(Button.builder(Component.translatable("gui.done"), (button) -> {
             Config.SPEC.save();
             this.minecraft.setScreen(this.lastScreen);
-        }).pos(this.width / 2 - 100, y + 50).size(200, 20).build());
+        }).pos(this.width / 2 - 100, y + 75).size(200, 20).build());
     }
 
     @Override

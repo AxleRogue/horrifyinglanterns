@@ -17,6 +17,7 @@
  */
 package me.axlerogue.horrifyinglanterns.api;
 
+import me.axlerogue.horrifyinglanterns.Config;
 import me.axlerogue.horrifyinglanterns.api.ability.BaseAbility;
 import me.axlerogue.horrifyinglanterns.api.ability.AbilityType;
 import net.minecraft.ChatFormatting;
@@ -77,6 +78,10 @@ public abstract class LanternBaseItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide) {
             checkAndSetOwner(stack, player);
+            if (!isOwner(stack, player)) {
+                player.displayClientMessage(Component.translatable("message.horrifyinglanterns.not_owner"), true);
+                return InteractionResultHolder.fail(stack);
+            }
         }
         return super.use(level, player, hand);
     }
@@ -100,5 +105,43 @@ public abstract class LanternBaseItem extends Item {
             tooltip.add(Component.translatable("tooltip.horrifyinglanterns.tethered", ownerName).withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.ITALIC));
         }
         super.appendHoverText(stack, level, tooltip, flag);
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        // Prevent the re-equip animation from playing every tick when LitTicks NBT updates
+        if (oldStack.getItem() == newStack.getItem() && !slotChanged) {
+            return false;
+        }
+        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        if (!level.isClientSide) {
+            if (isLit(stack)) {
+                int litTicks = stack.getOrCreateTag().getInt("LitTicks");
+                litTicks++;
+                
+                int maxTicks = Config.autoExtinguishMinutes * 1200; // Minutes to ticks (20 ticks/sec * 60 sec = 1200 ticks/min)
+                
+                if (litTicks >= maxTicks) {
+                    stack.getOrCreateTag().putBoolean("isLit", false);
+                    stack.getOrCreateTag().putInt("LitTicks", 0);
+                    if (entity instanceof Player player && isOwner(stack, player)) {
+                        String playerName = player.getName().getString();
+                        player.sendSystemMessage(Component.literal(playerName + ": Your lantern has extinguished, reignite it quickly hurry now!").withStyle(ChatFormatting.RED));
+                        level.playSound(null, player.getX(), player.getY(), player.getZ(), net.minecraft.sounds.SoundEvents.GENERIC_EXTINGUISH_FIRE, net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 1.0F);
+                    }
+                } else {
+                    stack.getOrCreateTag().putInt("LitTicks", litTicks);
+                }
+            } else {
+                if (stack.hasTag() && stack.getTag().contains("LitTicks")) {
+                    stack.getTag().remove("LitTicks");
+                }
+            }
+        }
     }
 }

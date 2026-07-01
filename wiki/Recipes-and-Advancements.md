@@ -57,3 +57,5 @@ To create an advancement that unlocks when a player obtains your lantern, use th
   }
 }
 ```
+
+The base mod uses similar advancements for its native items, like `"advancement.horrifyinglanterns.obtain_venom_fang_lantern": "Venomous Discovery"`!

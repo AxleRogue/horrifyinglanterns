@@ -38,6 +38,13 @@ The API now provides several base classes to simplify content creation:
 - **Animations**: `PlayerAnimationHandler` applies custom holding poses to any item extending `LanternBaseItem`.
 - **Action Bar Feedback**: All ability messages are displayed on the action bar for better visibility.
 
+## Mod Registries
+When creating addons or referencing the base mod's items/entities, you can use these internal registries located in `me.axlerogue.horrifyinglanterns.item.client` and `me.axlerogue.horrifyinglanterns.network`:
+- **`ModItems`**: Registry for built-in lanterns (e.g., `SanguineMoonLanternItem`, `DarkSkiesLanternItem`).
+- **`ModEntities`**: Registry containing `DarkOnesEntity`, `BlueLightningBolt`, and `ServantOfTheDarkHeartEntity`.
+- **`ModCreativeModeTabs`**: The dedicated creative tab for lanterns.
+- **`ModPackets`**: Handles the `ToggleLanternPacket` and `LanternAbilityPacket` channels.
+
 ## Handlers API
 Addon developers can reference or utilize the following handlers located in `me.axlerogue.horrifyinglanterns.api.handler`:
 - `LightHandler`: Manages block-based light placement and particle effects.
@@ -45,3 +52,4 @@ Addon developers can reference or utilize the following handlers located in `me.
 - `LanternInteractionHandler`: Manages interaction logic while holding lanterns.
 - `PlayerAnimationHandler`: Handles custom player animations.
 - `SanguineEffectHandler`: Manages special effects for sanguine-themed items.
+- `ServantSpawnHandler`: Automatically detects dropped lanterns and full player inventories to dynamically spawn `ServantOfTheDarkHeartEntity` instances.

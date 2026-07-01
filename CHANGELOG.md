@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-06-30
+### Added
+- **Venom Fang Lantern**: A new cursed lantern glowing with a sickly green light.
+  - **Poison AOE Ability (Key: V)**: Releases a toxic cloud inflicting Poison II on all nearby living entities within an 8-block radius for 10 seconds.
+  - **Spider Pacification Ability (Key: B)**: Calms nearby spiders, dropping their aggression and causing them to flee from the player in fear.
+- **Ownership System**: Lanterns now automatically bind to the first player that uses them. Only the true owner can toggle the lantern or use its abilities.
+- **Minion Alliance**: Player-owned entities (like Servants and Dark Ones) are strictly allied with their owner and each other. Friendly fire from the owner is entirely prevented.
+- **Creeper Repellent**: The terrifying aura of lit lanterns naturally scares away any Creepers that get too close.
+- **Auto-Extinguish**: Lit lanterns now automatically extinguish themselves after a configurable amount of in-game minutes to maintain gameplay balance.
+- **Config Option**: Added `Auto-Extinguish (Mins)` setting to the in-game configuration screen (defaults to 10 minutes).
+
+### Changed
+- **Servant of the Dark Heart Overhaul**: Entirely rebuilt the servant AI and spawning mechanics (`ServantSpawnHandler`):
+  - Servants now dynamically spawn based on the exact quantity of dropped lanterns when an owner's inventory is full.
+  - Implemented a priority queue that serves players who dropped the most lanterns first.
+  - Designed 4 custom AI goals so servants will actively seek out dropped lanterns, pick them up, follow the player, and gracefully return them (with a poof particle effect) as soon as inventory space frees up.
+- Comprehensively updated Wiki documentation, API Guide, Guidelines, and README to reflect the new API additions, Ownership systems, and Venom Fang features.
+
+### Fixed
+- **Re-equip Animation Glitch**: Overrode `shouldCauseReequipAnimation` to prevent the lantern from rapidly bobbing/re-equipping visually in first-person mode every tick while its internal NBT data updates.
+
+### Removed
+- Removed the old `TetherHandler` and `LanternStorage` features (including Ender Chest manipulation and drop-prevention) to transition cleanly to the strict Ownership & Servant dynamic-spawning system.
+
 ## [1.0.4] - 2026-06-23
 ### Added
 - **Community Support**: Created `ISSUE_TRACKER.md` with contribution guidelines, reporting rules, and issue labels.

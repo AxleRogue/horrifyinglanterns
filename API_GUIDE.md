@@ -57,9 +57,12 @@ public static final RegistryObject<Item> MY_CUSTOM_LANTERN = ITEMS.register("my_
 - **Base Renderers**: Extend `BaseEntityRenderer` or `BaseLivingEntityRenderer` for your entity's visuals.
 - **Base KeyMappings**: Use `BaseKeyMapping` for custom input handling.
 - **Toggle Mechanism**: Use the default keybind (standard is 'L') to toggle your lantern.
+- **Ownership System**: Automatically binds the lantern to the first player who uses it, restricting abilities and toggling strictly to that owner.
 - **Arm Animation**: The player's arm (and humanoid entities like `ServantOfTheDarkHeartEntity`) will automatically use the custom lantern holding animation when carrying a `LanternBaseItem`.
-- **Tethering & Servants**: Built-in support for item tethering. If a lantern is lost, the `TetherHandler` ensures it returns to the owner, even summoning a `ServantOfTheDarkHeartEntity` if the player's inventory is full.
 - **Entity Tinting**: The API automatically handles tinting nearby mobs with colored particles.
+- **Servant Entities**: A custom spectral servant system `ServantOfTheDarkHeartEntity` is retained to interact with dropped items dynamically. Spawning is handled automatically by `ServantSpawnHandler`.
+- **Minion Alliance**: Entities extending `BaseLivingEntity` override `isAlliedTo` and `hurt` to ensure minions do not attack each other and owners cannot accidentally deal friendly fire.
+- **Re-equip Animation Fix**: The `LanternBaseItem` overrides `shouldCauseReequipAnimation` to prevent the item from constantly bobbing when its background NBT data updates (like the auto-extinguish tick counter).
 
 ## Advanced Integration
 

@@ -38,3 +38,5 @@ By extending `LanternBaseItem`, your lantern automatically gets:
 - **Atmospheric Tinting**: Spawns colored particles that tint the ground and nearby entities based on your `lightColor`.
 - **Custom Arm Pose**: The player holds it with a unique animation managed by `PlayerAnimationHandler`.
 - **Toggle Support**: Works with the global lantern toggle keybind.
+- **Ownership System**: The lantern binds to the player upon first use. This automatically prevents other players from turning it on or casting abilities with it.
+- **Re-equip Animation Fix**: Includes a `shouldCauseReequipAnimation` override to prevent the lantern from visually glitching/bobbing when its NBT data changes (e.g., during tick updates).

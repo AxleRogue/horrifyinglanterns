@@ -4,5 +4,7 @@ public enum AbilityType {
     BURST,
     LEECH,
     SUMMON,
-    WRATH
+    WRATH,
+    POISON_AOE,
+    PACIFY_SPIDERS
 }

@@ -16,6 +16,8 @@ public class KeyHandler {
     public static final BaseKeyMapping LANTERN_LEECH = LanternKeyMappings.LANTERN_LEECH;
     public static final BaseKeyMapping LANTERN_SUMMON = LanternKeyMappings.LANTERN_SUMMON;
     public static final BaseKeyMapping LANTERN_WRATH = LanternKeyMappings.LANTERN_WRATH;
+    public static final BaseKeyMapping LANTERN_POISON_AOE = LanternKeyMappings.LANTERN_POISON_AOE;
+    public static final BaseKeyMapping LANTERN_PACIFY_SPIDERS = LanternKeyMappings.LANTERN_PACIFY_SPIDERS;
 
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {
@@ -24,5 +26,7 @@ public class KeyHandler {
         event.register(LANTERN_LEECH);
         event.register(LANTERN_SUMMON);
         event.register(LANTERN_WRATH);
+        event.register(LANTERN_POISON_AOE);
+        event.register(LANTERN_PACIFY_SPIDERS);
     }
 }

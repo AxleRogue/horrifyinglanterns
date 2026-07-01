@@ -17,4 +17,8 @@ Horrifying Lanterns is designed to be extensible. By using our `LanternBaseItem`
 - **Atmospheric Tinting**: Colored particle systems that tint the environment and nearby entities.
 - **Ability System**: Integrated support for active abilities with cooldowns and notifications.
 - **Animations**: Custom hand-holding animations for players and servants carrying lanterns.
-- **Tethering & Servants**: Automatic item retrieval system with invulnerable spectral servants that carry overflow items for players.
+- **Ownership System**: Lanterns automatically bind to the first player that uses them, preventing other players from toggling them or using their abilities.
+- **Servants**: Automatic lantern retrieval system with invulnerable spectral servants that spawn dynamically to fetch dropped lanterns for players with full inventories, prioritizing players based on the amount of dropped lanterns.
+- **Minion Alliance**: Minions are strictly allied with their owner and each other, preventing friendly fire.
+- **Creeper Repellent**: The terrifying aura of lit lanterns naturally scares away any Creepers that get too close.
+- **Auto-Extinguish**: Lit lanterns automatically extinguish after a configurable amount of in-game minutes to balance their power.

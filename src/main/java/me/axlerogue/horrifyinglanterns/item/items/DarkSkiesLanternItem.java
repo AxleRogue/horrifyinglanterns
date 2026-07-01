@@ -34,7 +34,7 @@ public class DarkSkiesLanternItem extends LanternBaseItem {
 
     public DarkSkiesLanternItem(Properties properties) {
         super(properties);
-        this.lightColor = 0x000033; // Dark blue
+        this.lightColor = 0x0041C2; // Blueberry blue
         this.abilities.put(AbilityType.SUMMON, new SummonDarkOnesAbility());
         this.abilities.put(AbilityType.WRATH, new SkyWrathAbility());
     }

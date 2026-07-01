@@ -33,6 +33,12 @@ public class ClientEvents {
             while (KeyHandler.LANTERN_WRATH.consumeClick()) {
                 ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.WRATH));
             }
+            while (KeyHandler.LANTERN_POISON_AOE.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.POISON_AOE));
+            }
+            while (KeyHandler.LANTERN_PACIFY_SPIDERS.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new LanternAbilityPacket(AbilityType.PACIFY_SPIDERS));
+            }
         }
     }
 }

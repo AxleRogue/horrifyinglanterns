@@ -1,0 +1,11 @@
+{
+	"parent": "horrifyinglanterns:item/venom_fang_lantern_extinguished",
+	"overrides": [
+		{
+			"predicate": {
+				"horrifyinglanterns:lit": 1
+			},
+			"model": "horrifyinglanterns:item/venom_fang_lantern_lit"
+		}
+	]
+}

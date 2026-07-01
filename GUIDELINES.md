@@ -2,7 +2,8 @@
 
 ## General Rules
 - All lantern items must extend `me.axlerogue.horrifyinglanterns.api.LanternBaseItem`.
-- Light properties (color, intensity) should be defined within the specific lantern class.
+- **Ownership System**: Lanterns automatically bind to their first user to prevent unauthorized interactions or ability use.
+- **Minion Alliance**: Mod entities (`BaseLivingEntity`) must be allied to their owner and other tamed minions, preventing friendly fire.
 - Dynamic lighting must be configurable via `Config.java`.
 - Use Forge's `DeferredRegister` for all registry entries.
 - Addon creators can use the `LanternBaseItem` API to easily integrate new lanterns.
@@ -26,13 +27,16 @@
 ## Implementation Details
 - `KeyHandler`: Registers the 'L' keybind for toggling lanterns.
 - `ClientEvents`: Handles the keybind press and sends a `ToggleLanternPacket` to the server.
-- `ToggleLanternPacket`: Handles the logic of toggling the "isLit" NBT tag on the lantern item. Includes a 15-second cooldown, plays fire-related sounds on success (lit/extinguish), and sends feedback messages (enabled/disabled/cooldown) to the player.
+- `ToggleLanternPacket`: Handles the logic of toggling the "isLit" NBT tag on the lantern item. Verifies the user is the lantern's owner. Includes a 15-second cooldown, plays fire-related sounds on success (lit/extinguish), and sends feedback messages (enabled/disabled/cooldown/not_owner) to the player.
+- `LanternAbilityPacket`: Handles ability casting over the network. Verifies the user is the lantern's owner before executing the logic.
 - `PlayerAnimationHandler`: Tracks and smooths player arm animations when holding lanterns.
 - `HumanoidModelMixin`: Injects into the player model to apply the "zombie-like" arm pose when a lantern is held.
-- `LanternBaseItem` (API): Base class for all lanterns. Includes a `lightColor` variable that should be set in the constructor of subclasses.
+- `LanternBaseItem` (API): Base class for all lanterns. Handles Ownership binding (`checkAndSetOwner` / `isOwner`), auto-extinguish ticking logic, and prevents re-equip animation glitches via `shouldCauseReequipAnimation`. Includes a `lightColor` variable that should be set in the constructor of subclasses.
+- `ServantOfTheDarkHeartEntity`: A spectral entity with custom AI (`ServantFindLanternGoal`, `ServantFetchLanternGoal`, `ServantFollowOwnerWaitGoal`, `ServantReturnLanternGoal`) that automatically retrieves dropped lanterns for its bound owner when the owner's inventory is completely full. Spawning is handled by `ServantSpawnHandler`.
 - `SanguineMoonLanternItem`: An example lantern that sets `lightColor` to red (0xFF0000).
-- `Config`: Stores the global `lightLevel` and `lightRadius`.
+- `Config`: Stores the global `lightLevel`, `lightRadius`, and `autoExtinguishMinutes`.
 - `ModConfigScreen`: In-game GUI for editing configuration values.
+- `CreeperScareHandler`: Injects `AvoidEntityGoal` into Creepers so they flee from players holding lit lanterns.
 
 ## Recipes & Advancements
 - `sanguine_moon_lantern` is craftable using: Blackstone, Ink Sac, Redstone Block, Glass, and Blaze Powder.

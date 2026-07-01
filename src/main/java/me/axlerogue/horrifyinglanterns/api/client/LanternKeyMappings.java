@@ -12,4 +12,6 @@ public class LanternKeyMappings {
     public static final BaseKeyMapping LANTERN_LEECH = new BaseKeyMapping("key.horrifyinglanterns.leech", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, KEY_CATEGORY_LANTERNS);
     public static final BaseKeyMapping LANTERN_SUMMON = new BaseKeyMapping("key.horrifyinglanterns.summon", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, KEY_CATEGORY_LANTERNS);
     public static final BaseKeyMapping LANTERN_WRATH = new BaseKeyMapping("key.horrifyinglanterns.wrath", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, KEY_CATEGORY_LANTERNS);
+    public static final BaseKeyMapping LANTERN_POISON_AOE = new BaseKeyMapping("key.horrifyinglanterns.poison_aoe", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, KEY_CATEGORY_LANTERNS);
+    public static final BaseKeyMapping LANTERN_PACIFY_SPIDERS = new BaseKeyMapping("key.horrifyinglanterns.pacify_spiders", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, KEY_CATEGORY_LANTERNS);
 }

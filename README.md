@@ -7,8 +7,11 @@ Horrifying Lanterns is a Minecraft mod for version 1.20.1 (Forge) that introduce
 - **Dynamic Lighting**: Lanterns emit light while held in your main hand or off-hand.
 - **Unique Abilities**: Each lantern comes with two distinct active abilities (Sanguine Moon: Burst and Leech | Dark Skies: Summon and Wrath).
 - **Custom Sounds**: New atmospheric sounds for minions, including idle breathing and attack screeches.
-- **Tethering System**: Lanterns are bound to their owner. If dropped, lost in a broken chest, or the owner dies, the lantern will attempt to return to the owner's inventory.
-- **Servant of the Dark Heart**: If your inventory is full, a loyal, invulnerable spectral servant will appear to carry your tethered lanterns for you, following you until you have space to take them back.
+- **Ownership System**: Lanterns bind to their first user automatically. Only the bound owner can toggle them or use their abilities.
+- **Servant of the Dark Heart**: When a player drops their owned lanterns and their inventory is full, loyal, invulnerable spectral servants will spawn dynamically based on the amount of dropped lanterns. They prioritize players based on the number of dropped lanterns, fetch them, and follow the player until inventory space frees up.
+- **Minion Alliance**: Minions (like Servants and Dark Ones) are strictly allied with their owner. They will not attack each other, and friendly fire from the owner is prevented.
+- **Creeper Repellent**: The terrifying aura of lit lanterns naturally scares away any Creepers that get too close.
+- **Auto-Extinguish**: To maintain balance, any lit lantern will automatically extinguish itself after 10 in-game minutes of continuous use, warning the player to reignite it quickly.
 - **Custom Animations**: Players and Servants holding a lantern will have a unique "zombie-like" arm pose.
 - **Atmospheric Effects**: Colored particles and sounds enhance the horror experience.
 - **Addon API**: A built-in API with base classes for items, abilities, entities, and renderers allows other modders to easily create their own custom lanterns.
@@ -30,6 +33,14 @@ A lantern that harnesses the power of the dark abyss and the storm. It glows wit
 *   **Summon (Key: V)**: Summons **4 Dark Ones** (loyal shadow entities) that hunt down the entity you are currently looking at. If no target is found, they simply guard you. You can only have one set of Dark Ones active at a time.
 *   **Wrath (Key: B)**: Strikes the target location (up to 32 blocks away) with a bolt of **Abyssal Lightning**, dealing magic damage to anything caught in the strike.
 *   **Crafting**: Blackstone, Ink Sac, Amethyst Block, Glass, and Blaze Powder.
+
+### 🟢 Venom Fang Lantern
+A cursed lantern glowing with a sickly green light that channels the essence of venomous creatures.
+
+*   **Poison AOE (Key: V)**: Releases a toxic cloud that inflicts **Poison II** on all nearby living entities within an 8-block radius for 10 seconds.
+*   **Spider Pacification (Key: B)**: Calms the minds of arachnids, pacifying all spiders within a 16-block radius, removing their aggression, and causing them to scatter away in fear.
+*   **Crafting**: Blackstone, Ink Sac, Emerald Block, Glass, Blaze Powder, and Spider Eye.
+
 ---
 
 ## ⚙️ Configuration
@@ -37,6 +48,7 @@ A lantern that harnesses the power of the dark abyss and the storm. It glows wit
 The mod is highly configurable via the in-game config screen (found in the Mod List) or the `horrifyinglanterns-common.toml` file.
 
 *   **Light Level**: Adjust the brightness of the lantern's light (0-15).
+*   **Auto-Extinguish Time**: Configure the amount of in-game minutes (1-60) before a lit lantern automatically turns itself off (default is 10).
 *   **Abilities**: Each lantern has two unique abilities with dedicated cooldowns.
 *   **Feedback**: All ability status and cooldown messages are displayed clearly on the action bar.
 *   **Lighting System**: A custom block-based system provides real light at the player's feet.
@@ -48,7 +60,8 @@ The mod is highly configurable via the in-game config screen (found in the Mod L
 
 *   **Sanguine Discovery**: Obtain a Sanguine Moon Lantern.
 *   **Abyssal Discovery**: Obtain a Dark Skies Lantern.
-*   **Master of Horrifying Lanterns**: Obtain both lanterns to unlock a special challenge advancement with a custom horror-themed background.
+*   **Venomous Discovery**: Obtain a Venom Fang Lantern.
+*   **Master of Horrifying Lanterns**: Obtain all three lanterns to unlock a special challenge advancement with a custom horror-themed background.
 
 ---
 

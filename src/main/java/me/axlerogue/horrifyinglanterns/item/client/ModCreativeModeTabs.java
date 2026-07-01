@@ -25,6 +25,7 @@ public class ModCreativeModeTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.SANGUINE_MOON_LANTERN.get());
                         output.accept(ModItems.DARK_SKIES_LANTERN.get());
+                        output.accept(ModItems.VENOM_FANG_LANTERN.get());
                     })
                     .build());
 
